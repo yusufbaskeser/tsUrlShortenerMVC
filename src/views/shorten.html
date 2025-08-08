@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Link Kısalt</title>
+    <link rel="stylesheet" href="/css/shorten.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">URL King</div>
+        <ul class="nav-links">
+          <li><a href="/home">Home</a></li>
+
+          <li><a href="/list">ALl urls</a></li>
+          <li><a href="/myurls">my urls</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+      <h2>Link Kısalt</h2>
+      <form id="shortenForm">
+        <input
+          type="url"
+          id="originalUrl"
+          name="originalUrl"
+          placeholder="Link"
+          required
+        />
+
+        <button type="submit" class="linkbutton">Kısalt</button>
+      </form>
+    </div>
+
+    <script src="/js/shorten.js"></script>
+  </body>
+</html>

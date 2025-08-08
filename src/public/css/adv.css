@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    padding: 0;
+   background-color: #000;
+  }
+  
+  .page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .ad-box {
+    width: 100px;
+    height: 500px;
+    border: 1px solid #333;
+    margin: 0 40px;
+    background-color: black;
+  }
+  
+  .center-text {
+    font-size: 100px;
+    font-weight: bold;
+    color: #000;
+  }
