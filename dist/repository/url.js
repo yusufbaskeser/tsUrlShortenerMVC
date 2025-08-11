@@ -13,17 +13,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUrlsByUsername = exports.createUrl = exports.findAllUrls = exports.findShortUrl = void 0;
-const url_js_1 = __importDefault(require("../models/url.js"));
+const url_1 = __importDefault(require("../models/url"));
 const findShortUrl = (shortUrl) => __awaiter(void 0, void 0, void 0, function* () {
-    return yield url_js_1.default.findOne({ shortUrl });
+    return yield url_1.default.findOne({ shortUrl });
 });
 exports.findShortUrl = findShortUrl;
 const findAllUrls = () => __awaiter(void 0, void 0, void 0, function* () {
-    return yield url_js_1.default.find();
+    return yield url_1.default.find();
 });
 exports.findAllUrls = findAllUrls;
 const createUrl = (_a) => __awaiter(void 0, [_a], void 0, function* ({ shortUrl, originalUrl, user }) {
-    const newUrl = new url_js_1.default({
+    const newUrl = new url_1.default({
         shortUrl,
         originalUrl,
         createdBy: user.username,
@@ -33,6 +33,6 @@ const createUrl = (_a) => __awaiter(void 0, [_a], void 0, function* ({ shortUrl,
 });
 exports.createUrl = createUrl;
 const getUrlsByUsername = (username) => __awaiter(void 0, void 0, void 0, function* () {
-    return url_js_1.default.find({ createdBy: username });
+    return url_1.default.find({ createdBy: username });
 });
 exports.getUrlsByUsername = getUrlsByUsername;

@@ -10,13 +10,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.redirectUrl = exports.shortenUrl = void 0;
-const url_js_1 = require("../services/url.js");
+const url_1 = require("../services/url");
 const shortenUrl = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
     const { originalUrl } = req.body;
     try {
-        const result = yield (0, url_js_1.urlShorten)({ token, originalUrl });
+        const result = yield (0, url_1.urlShorten)({ token, originalUrl });
         console.log(result);
         res.status(200).json({
             result,
@@ -34,7 +34,7 @@ const redirectUrl = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         return res.status(400).json({ error: "shortUrl is required" });
     }
     try {
-        const originalUrl = yield (0, url_js_1.urlRedirect)(shortUrl);
+        const originalUrl = yield (0, url_1.urlRedirect)(shortUrl);
         return res.redirect(originalUrl);
     }
     catch (err) {

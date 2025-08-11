@@ -13,18 +13,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addUser = exports.getByUsername = exports.getByToken = void 0;
-const user_js_1 = __importDefault(require("../models/user.js"));
+const user_1 = __importDefault(require("../models/user"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
-const config_js_1 = __importDefault(require("../config/config.js"));
+const config_1 = __importDefault(require("../config/config"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const getByToken = (token) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const decoded = jsonwebtoken_1.default.verify(token, config_js_1.default.JWT_SECRET_KEY);
+        const decoded = jsonwebtoken_1.default.verify(token, config_1.default.JWT_SECRET_KEY);
         console.log("Decoded token payload:", decoded);
         if (typeof decoded === 'string') {
             throw new Error("Decoded token is a string, expected JwtPayload");
         }
-        const user = yield user_js_1.default.findById(decoded.id);
+        const user = yield user_1.default.findById(decoded.id);
         return user;
     }
     catch (err) {
@@ -34,13 +34,13 @@ const getByToken = (token) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.getByToken = getByToken;
 const getByUsername = (username) => __awaiter(void 0, void 0, void 0, function* () {
-    return yield user_js_1.default.findOne({ username });
+    return yield user_1.default.findOne({ username });
 });
 exports.getByUsername = getByUsername;
 const addUser = (_a) => __awaiter(void 0, [_a], void 0, function* ({ username, password }) {
     const salt = yield bcrypt_1.default.genSalt(10);
     const hash = yield bcrypt_1.default.hash(password, salt);
-    const newUser = new user_js_1.default({
+    const newUser = new user_1.default({
         username,
         password: hash,
     });

@@ -13,23 +13,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = __importDefault(require("../index"));
-const { app, mongoose } = index_1.default;
+const { app, mongoose, server } = index_1.default;
 const supertest_1 = __importDefault(require("supertest"));
-const auth_utils_js_1 = require("./auth.utils.js");
-const config_js_1 = __importDefault(require("../config/config.js"));
-const user_js_1 = __importDefault(require("../models/user.js"));
+const auth_utils_1 = require("./auth.utils");
+const config_1 = __importDefault(require("../config/config"));
+const user_1 = __importDefault(require("../models/user"));
 beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield mongoose.createConnection(String(config_js_1.default.MONGODUMMY_CONNECT));
+    yield mongoose.createConnection(String(config_1.default.MONGODUMMY_CONNECT));
 }));
 beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield user_js_1.default.deleteMany();
+    yield user_1.default.deleteMany();
 }));
 afterEach(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield user_js_1.default.deleteMany();
+    yield user_1.default.deleteMany();
 }));
 afterAll(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield user_js_1.default.deleteMany();
+    yield user_1.default.deleteMany();
     yield mongoose.disconnect();
+    yield server.close();
 }));
 describe("auth", () => {
     it("POST /auth/register is it working", () => __awaiter(void 0, void 0, void 0, function* () {
@@ -52,7 +53,7 @@ describe("auth", () => {
         expect(res.body.error).toBeDefined();
     }));
     it("POST /auth/login is it working", () => __awaiter(void 0, void 0, void 0, function* () {
-        yield (0, auth_utils_js_1.registerTest)({ username: "yusuf", password: "yusuf123" });
+        yield (0, auth_utils_1.registerTest)({ username: "yusuf", password: "yusuf123" });
         const res = yield (0, supertest_1.default)(app).post("/auth/login").send({
             username: "yusuf",
             password: "yusuf123",
@@ -63,7 +64,7 @@ describe("auth", () => {
         expect(res.statusCode).toBe(200);
     }));
     it("POST /auth/login fails when user input wrong username and password", () => __awaiter(void 0, void 0, void 0, function* () {
-        yield (0, auth_utils_js_1.registerTest)({ username: "yusuf", password: "yusuf123" });
+        yield (0, auth_utils_1.registerTest)({ username: "yusuf", password: "yusuf123" });
         const res = yield (0, supertest_1.default)(app).post("/auth/login").send({
             username: "wronguser",
             password: "wrongpass",

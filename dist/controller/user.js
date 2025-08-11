@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.listUrls = exports.getMyUrls = void 0;
-const user_js_1 = require("../services/user.js");
+const user_1 = require("../services/user");
 const getMyUrls = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (!req.user) {
         return res.status(401).json({ error: "User not authenticated" });
@@ -19,7 +19,7 @@ const getMyUrls = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const userId = req.user.id;
         console.log("wqeqweqweqweqweqw", userId);
         console.log("wqeqweqweqweqweqw", userId);
-        const urls = yield (0, user_js_1.getUserUrls)(String(userId));
+        const urls = yield (0, user_1.getUserUrls)(String(userId));
         res.status(200).json({ myurls: urls });
     }
     catch (err) {
@@ -30,7 +30,7 @@ const getMyUrls = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getMyUrls = getMyUrls;
 const listUrls = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const urls = yield (0, user_js_1.listAllUrls)();
+        const urls = yield (0, user_1.listAllUrls)();
         res.status(200).json(urls);
     }
     catch (err) {

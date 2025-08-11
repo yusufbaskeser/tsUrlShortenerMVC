@@ -14,18 +14,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userLogin = exports.userRegister = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
-const generateJwtToken_js_1 = __importDefault(require("../utils/generateJwtToken.js"));
-const user_js_1 = require("../repository/user.js");
+const generateJwtToken_1 = __importDefault(require("../utils/generateJwtToken"));
+const user_1 = require("../repository/user");
 const userRegister = (_a) => __awaiter(void 0, [_a], void 0, function* ({ username, password }) {
     if (!username || !password) {
         throw new Error("Username and password required");
     }
-    const existingUser = yield (0, user_js_1.getByUsername)(username);
+    const existingUser = yield (0, user_1.getByUsername)(username);
     if (existingUser) {
         throw new Error("Username already exists");
     }
-    const newUser = yield (0, user_js_1.addUser)({ username, password });
-    const token = (0, generateJwtToken_js_1.default)({
+    const newUser = yield (0, user_1.addUser)({ username, password });
+    const token = (0, generateJwtToken_1.default)({
         id: newUser._id.toString(),
         username: newUser.username,
     });
@@ -39,7 +39,7 @@ const userLogin = (_a) => __awaiter(void 0, [_a], void 0, function* ({ username,
     if (!username || !password) {
         throw new Error("Username and password required");
     }
-    const user = yield (0, user_js_1.getByUsername)(username);
+    const user = yield (0, user_1.getByUsername)(username);
     if (!user) {
         throw new Error("User not found");
     }
@@ -47,7 +47,7 @@ const userLogin = (_a) => __awaiter(void 0, [_a], void 0, function* ({ username,
     if (!isValid) {
         throw new Error("Incorrect password");
     }
-    const token = (0, generateJwtToken_js_1.default)({ id: user._id.toString(), username: user.username });
+    const token = (0, generateJwtToken_1.default)({ id: user._id.toString(), username: user.username });
     return {
         message: "Login successful",
         token: token,

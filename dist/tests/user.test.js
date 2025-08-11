@@ -13,33 +13,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = __importDefault(require("../index"));
-const { app, mongoose } = index_1.default;
+const { app, mongoose, server } = index_1.default;
 const supertest_1 = __importDefault(require("supertest"));
-const config_js_1 = __importDefault(require("../config/config.js"));
-const auth_utils_js_1 = require("./auth.utils.js");
+const config_1 = __importDefault(require("../config/config"));
+const auth_utils_1 = require("./auth.utils");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const user_js_1 = __importDefault(require("../models/user.js"));
-const url_js_1 = __importDefault(require("../models/url.js"));
+const user_1 = __importDefault(require("../models/user"));
+const url_1 = __importDefault(require("../models/url"));
 beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield mongoose.createConnection(String(config_js_1.default.MONGODUMMY_CONNECT));
+    yield mongoose.createConnection(String(config_1.default.MONGODUMMY_CONNECT));
 }));
 beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield user_js_1.default.deleteMany();
-    yield url_js_1.default.deleteMany();
+    yield user_1.default.deleteMany();
+    yield url_1.default.deleteMany();
 }));
 afterEach(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield user_js_1.default.deleteMany();
-    yield url_js_1.default.deleteMany();
+    yield user_1.default.deleteMany();
+    yield url_1.default.deleteMany();
 }));
 afterAll(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield mongoose.connection.dropDatabase();
-    yield user_js_1.default.deleteMany();
-    yield url_js_1.default.deleteMany();
+    yield user_1.default.deleteMany();
+    yield url_1.default.deleteMany();
     yield mongoose.disconnect();
+    yield server.close();
 }));
 describe("User", () => {
     it("GET /user/myurls is it working", () => __awaiter(void 0, void 0, void 0, function* () {
-        const { token } = yield (0, auth_utils_js_1.registerTest)({ username: "yusuf", password: "yusuf123" });
+        const { token } = yield (0, auth_utils_1.registerTest)({ username: "yusuf", password: "yusuf123" });
         const res = yield (0, supertest_1.default)(app)
             .get("/user/myurls")
             .set("Authorization", token);
@@ -48,7 +48,7 @@ describe("User", () => {
         expect(res.statusCode).toBe(200);
     }));
     it("GET /user/myurls is empty", () => __awaiter(void 0, void 0, void 0, function* () {
-        const { token } = yield (0, auth_utils_js_1.registerTest)({ username: "yusuf", password: "yusuf123" });
+        const { token } = yield (0, auth_utils_1.registerTest)({ username: "yusuf", password: "yusuf123" });
         const res = yield (0, supertest_1.default)(app)
             .get("/user/myurls")
             .set("Authorization", token);
@@ -69,7 +69,7 @@ describe("User", () => {
         expect(res.body.error).toBeDefined();
     }));
     it("GET /user/myurls with expired token", () => __awaiter(void 0, void 0, void 0, function* () {
-        const expiredToken = jsonwebtoken_1.default.sign({ id: "fakeid" }, String(config_js_1.default.JWT_SECRET_KEY), { expiresIn: -10 });
+        const expiredToken = jsonwebtoken_1.default.sign({ id: "fakeid" }, String(config_1.default.JWT_SECRET_KEY), { expiresIn: -10 });
         const res = yield (0, supertest_1.default)(app)
             .get("/user/myurls")
             .set("Authorization", `Bearer ${expiredToken}`);

@@ -10,11 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.loginUser = exports.registerUser = void 0;
-const auth_js_1 = require("../services/auth.js");
+const auth_1 = require("../services/auth");
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = req.body;
     try {
-        const result = yield (0, auth_js_1.userRegister)({ username, password });
+        const result = yield (0, auth_1.userRegister)({ username, password });
         res.status(201).json(result);
     }
     catch (err) {
@@ -26,7 +26,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = req.body;
     console.log("Login request:", { username, password });
     try {
-        const result = yield (0, auth_js_1.userLogin)({ username, password });
+        const result = yield (0, auth_1.userLogin)({ username, password });
         console.log("Login success:", result);
         res.status(200).json(result);
     }

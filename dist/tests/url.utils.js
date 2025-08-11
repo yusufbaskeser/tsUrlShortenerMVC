@@ -13,12 +13,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.shortUrl = void 0;
-const auth_utils_js_1 = require("./auth.utils.js");
+const auth_utils_1 = require("./auth.utils");
 const supertest_1 = __importDefault(require("supertest"));
-const index_js_1 = __importDefault(require("../index.js"));
-const { app } = index_js_1.default;
+const index_1 = __importDefault(require("../index"));
+const { app } = index_1.default;
 const shortUrl = () => __awaiter(void 0, void 0, void 0, function* () {
-    const { token } = yield (0, auth_utils_js_1.registerTest)({ username: "yusuf", password: "yusuf123" });
+    const { token } = yield (0, auth_utils_1.registerTest)({ username: "yusuf", password: "yusuf123" });
     const res = yield (0, supertest_1.default)(app)
         .post("/url/shorten")
         .set("Authorization", token)
