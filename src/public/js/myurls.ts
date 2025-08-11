@@ -24,7 +24,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       shortUrl: string;
     }
 
-    const urls: UrlItem[] = await res.json();
+    const data = await res.json();
+    const urls: UrlItem[] = data.myurls;
 
     const list = document.getElementById("myUrlList") as HTMLUListElement | null;
     if (!list) {

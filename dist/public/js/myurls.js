@@ -25,7 +25,8 @@ document.addEventListener("DOMContentLoaded", () => __awaiter(void 0, void 0, vo
             alert("Hata: " + (err.message || res.statusText));
             return;
         }
-        const urls = yield res.json();
+        const data = yield res.json();
+        const urls = data.myurls;
         const list = document.getElementById("myUrlList");
         if (!list) {
             console.error("URL listesi elementi bulunamadı.");
