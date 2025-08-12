@@ -1,10 +1,10 @@
 import request from 'supertest'
 import index from '../index'
-import { user } from '../types/User'
+import { User } from '../types/User'
 
 const { app } = index
 
-export const registerTest = async ({ username, password }: user) => {
+export const registerTest = async ({ username, password }: User) => {
   const res = await request(app).post('/auth/register').send({
     username,
     password,

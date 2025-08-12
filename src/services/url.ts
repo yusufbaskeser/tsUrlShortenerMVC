@@ -2,7 +2,7 @@ import {generateToken} from '../utils/generateToken'
 import {findShortUrl, createUrl} from '../repository/url'
 import {getByToken} from '../repository/user'
 import User from '../models/user'
-import { UrlInput, url } from '../types/User';
+import { UrlInput, Url } from '../types/User';
 
 
 export const urlShorten = async ({ token, originalUrl }: UrlInput) => {

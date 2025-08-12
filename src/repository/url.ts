@@ -1,16 +1,16 @@
-import Url from '../models/url'
-import {url} from '../types/User'
+import UrlModel from '../models/url'
+import {Url} from '../types/User'
 
 export const findShortUrl = async (shortUrl : string) => {
-  return await Url.findOne({ shortUrl });
+  return await UrlModel.findOne({ shortUrl });
 };
 
 export const findAllUrls = async () => {
-  return await Url.find();
+  return await UrlModel.find();
 };
 
-export const createUrl = async ({shortUrl, originalUrl, user} : url) => {
-  const newUrl = new Url({
+export const createUrl = async ({shortUrl, originalUrl, user} : Url) => {
+  const newUrl = new UrlModel({
     shortUrl,
     originalUrl,
     createdBy: user.username,
@@ -20,6 +20,6 @@ export const createUrl = async ({shortUrl, originalUrl, user} : url) => {
 };
 
 export const getUrlsByUsername = async (username : string) => {
-  return Url.find({ createdBy: username });
+  return UrlModel.find({ createdBy: username });
 };
 

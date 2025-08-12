@@ -1,8 +1,8 @@
-import User from '../models/user'
+import UserModel from '../models/user'
 import bcrypt from 'bcrypt'
 import config from '../config/config'
 import jwt from 'jsonwebtoken';
-import { user } from '../types/User'
+import { User } from '../types/User'
 
 
 export const getByToken = async (token : string) => {
@@ -14,7 +14,7 @@ export const getByToken = async (token : string) => {
         throw new Error("Decoded token is a string, expected JwtPayload");
       }
 
-    const user = await User.findById(decoded.id);
+    const user = await UserModel.findById(decoded.id);
     return user;
   } catch (err : any) {
     console.log("Token verify error:", err.message);
@@ -25,16 +25,16 @@ export const getByToken = async (token : string) => {
 
 export const getByUsername = async (username : string) => {
 
-  return await User.findOne({ username });
+  return await UserModel.findOne({ username });
 
 }
 
 
-export const addUser = async ({username, password} : user) => {
+export const addUser = async ({username, password} : User) => {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const newUser = new User({
+  const newUser = new UserModel({
     username,
     password: hash,
   });

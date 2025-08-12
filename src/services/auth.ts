@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt';
 import generateJwtToken from '../utils/generateJwtToken';
 import { getByUsername, addUser } from '../repository/user';
-import { user } from '../types/User'
+import { User } from '../types/User'
 
-export const userRegister = async ({ username, password }: user) => {
+export const userRegister = async ({ username, password }: User) => {
   if (!username || !password) {
     throw new Error("Username and password required");
   }
@@ -29,7 +29,7 @@ export const userRegister = async ({ username, password }: user) => {
 
 
 
-export const userLogin = async ({ username, password } : user) => {
+export const userLogin = async ({ username, password } : User) => {
   if (!username || !password) {
     throw new Error("Username and password required");
   }

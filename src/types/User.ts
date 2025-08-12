@@ -1,4 +1,4 @@
-export interface user {
+export interface User {
   id?: string;
   username: string;
   password: string;
@@ -9,9 +9,8 @@ export interface UrlInput {
   originalUrl?: string;
 }
 
-export interface url {
+export interface Url {
   shortUrl?: string;
   originalUrl?: string;
-  token?: string | null;
-  user: user;
+  user: User;
 }
