@@ -10,8 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.getElementById("loginForm");
-    if (!loginForm) {
-        console.error("Login form not found.");
+    const messageDiv = document.getElementById("loginMessage");
+    if (!loginForm || !messageDiv) {
+        console.error("Login form veya mesaj div'i bulunamadı.");
         return;
     }
     loginForm.addEventListener("submit", (e) => __awaiter(void 0, void 0, void 0, function* () {
@@ -19,13 +20,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const usernameInput = document.getElementById("username");
         const passwordInput = document.getElementById("password");
         if (!usernameInput || !passwordInput) {
-            alert("Username or password input not found.");
+            messageDiv.style.color = "red";
+            messageDiv.textContent = "Username or password input not found.";
             return;
         }
         const username = usernameInput.value.trim();
         const password = passwordInput.value.trim();
         if (!username || !password) {
-            alert("Please fill in both username and password.");
+            messageDiv.style.color = "red";
+            messageDiv.textContent = "Please fill in both username and password.";
             return;
         }
         try {
@@ -39,16 +42,27 @@ document.addEventListener("DOMContentLoaded", () => {
             if (response.ok) {
                 const data = yield response.json();
                 localStorage.setItem("token", data.token);
-                alert("Login successful!");
-                window.location.href = "/home";
+                messageDiv.style.color = "green";
+                messageDiv.textContent = "Login successful! Redirecting...";
+                setTimeout(() => {
+                    window.location.href = "/home";
+                }, 1500);
             }
             else {
                 const error = yield response.json();
-                alert(`Login failed: ${error.message || response.statusText}`);
+                messageDiv.style.color = "red";
+                messageDiv.textContent = `Login failed: ${error.message || response.statusText}`;
             }
         }
         catch (err) {
-            alert("Network error: " + err.message);
+            if (err instanceof Error) {
+                messageDiv.style.color = "red";
+                messageDiv.textContent = "Network error: " + err.message;
+            }
+            else {
+                messageDiv.style.color = "red";
+                messageDiv.textContent = "An unknown error occurred.";
+            }
         }
     }));
 });

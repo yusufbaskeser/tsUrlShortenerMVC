@@ -1,27 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/css/myurls.css" />
-    <title>Benim URL’lerim</title>
-  </head>
-  <body>
-    <header>
-      <nav class="navbar">
-        <div class="logo">URL King</div>
-        <ul class="nav-links">
-          <li><a href="/home">Home</a></li>
-          <li><a href="/shorten">Shorten</a></li>
-          <li><a href="/list">allUrls</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <h1>Benim URL’lerim</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My URLs - Shortly</title>
+  <link rel="stylesheet" href="/css/myurls.css" />
+</head>
+<body>
+  <header>
+    <a href="/home.html" class="logo">Shortly</a>
+    <nav>
+      <ul>
+        <li><a href="/allUrls.html">All URLs</a></li>
+        <li><a href="/myUrls.html">My URLs</a></li>
+      </ul>
+    </nav>
+  </header>
 
-      <ul id="myUrlList"></ul>
-    </main>
+  <main>
+    <div class="main-container">
+      <section class="myurls-section">
+        <h1>My Shortened Links</h1>
+        <br>
 
-    <script src="/js/myurls.js"></script>
-  </body>
+        <div id="myUrlList" class="url-list">
+          <!-- JS ile doldurulacak -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Shortly. Tüm hakları saklıdır.</p>
+  </footer>
+
+  <script src="/js/myUrls.js"></script>
+</body>
+
 </html>

@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm") as HTMLFormElement | null;
+  const messageDiv = document.getElementById("loginMessage") as HTMLDivElement | null;
 
-  if (!loginForm) {
-    console.error("Login form not found.");
+  if (!loginForm || !messageDiv) {
+    console.error("Login form veya mesaj div'i bulunamadı.");
     return;
   }
 
@@ -13,20 +14,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const passwordInput = document.getElementById("password") as HTMLInputElement | null;
 
     if (!usernameInput || !passwordInput) {
-      alert("Username or password input not found.");
+      messageDiv.style.color = "red";
+      messageDiv.textContent = "Username or password input not found.";
       return;
     }
 
-    const username = usernameInput.value.trim();
-    const password = passwordInput.value.trim();
+    const username: string = usernameInput.value.trim();
+    const password: string = passwordInput.value.trim();
 
     if (!username || !password) {
-      alert("Please fill in both username and password.");
+      messageDiv.style.color = "red";
+      messageDiv.textContent = "Please fill in both username and password.";
       return;
     }
 
     try {
-      const response = await fetch("/auth/login", {
+      const response: Response = await fetch("/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -37,14 +40,24 @@ document.addEventListener("DOMContentLoaded", () => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("token", data.token);
-        alert("Login successful!");
-        window.location.href = "/home";
+        messageDiv.style.color = "green";
+        messageDiv.textContent = "Login successful! Redirecting...";
+        setTimeout(() => {
+          window.location.href = "/home";
+        }, 1500);
       } else {
-        const error = await response.json();
-        alert(`Login failed: ${error.message || response.statusText}`);
+        const error: { message?: string } = await response.json();
+        messageDiv.style.color = "red";
+        messageDiv.textContent = `Login failed: ${error.message || response.statusText}`;
       }
-    } catch (err: any) {
-      alert("Network error: " + err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        messageDiv.style.color = "red";
+        messageDiv.textContent = "Network error: " + err.message;
+      } else {
+        messageDiv.style.color = "red";
+        messageDiv.textContent = "An unknown error occurred.";
+      }
     }
   });
 });

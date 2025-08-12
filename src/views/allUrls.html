@@ -1,26 +1,40 @@
-<!doctype html>
-<html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/css/allUrls.css" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>All URLs - Shortly</title>
+  <link rel="stylesheet" href="/css/myUrls.css" />
+</head>
+<body>
+  <header>
+    <a href="/home.html" class="logo">Shortly</a>
+    <nav>
+      <ul>
+        <li><a href="/allUrls.html">All URLs</a></li>
+        <li><a href="/myUrls.html">My URLs</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <title>Tüm URL’ler</title>
-  </head>
-  <body>
-    <header>
-      <nav class="navbar">
-        <div class="logo">URL King</div>
-        <ul class="nav-links">
-          <li><a href="/home">Home</a></li>
 
-          <li><a href="/shorten">Shorten</a></li>
-          <li><a href="/myurls">myurls</a></li>
-        </ul>
-      </nav>
-    </header>
-    <h1>All URLs</h1>
-    <ul id="urlList"></ul>
+  <main>
+    <div class="main-container">
+      <section class="allurls-section">
+        <h1>All Shortened Links</h1>
+        <br>
 
-    <script src="/js/allUrls.js"></script>
-  </body>
+        <div id="myUrlList" class="url-list">
+          <!-- Filled by JS -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Shortly. All rights reserved.</p>
+  </footer>
+
+  <script src="/js/allUrls.js"></script>
+</body>
 </html>

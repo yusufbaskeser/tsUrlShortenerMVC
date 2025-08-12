@@ -21,22 +21,32 @@ document.addEventListener("DOMContentLoaded", () => __awaiter(void 0, void 0, vo
             },
         });
         if (!res.ok) {
-            const err = yield res.json();
+            const err = (yield res.json());
             alert("Hata: " + (err.message || res.statusText));
             return;
         }
-        const data = yield res.json();
+        const data = (yield res.json());
         const urls = data.myurls;
-        const list = document.getElementById("myUrlList");
-        if (!list) {
+        const container = document.getElementById("myUrlList");
+        if (!container) {
             console.error("URL listesi elementi bulunamadı.");
             return;
         }
-        list.innerHTML = "";
+        container.innerHTML = "";
         urls.forEach((item) => {
-            const li = document.createElement("li");
-            li.innerHTML = `Orijinal: ${item.originalUrl} — Kısa: <a href="http://localhost:3000/url/${item.shortUrl}" target="_blank">${item.shortUrl}</a>`;
-            list.appendChild(li);
+            const card = document.createElement("div");
+            card.className = "url-card";
+            card.innerHTML = `
+        <div class="original-url">
+          <p>Original URL:</p>
+          <a href="${item.originalUrl}" target="_blank" rel="noopener noreferrer">${item.originalUrl}</a>
+        </div>
+        <div class="shortly-url">
+          <p>Shortly:</p>
+          <a href="http://localhost:3000/url/${item.shortUrl}" target="_blank" rel="noopener noreferrer">${item.shortUrl}</a>
+        </div>
+      `;
+            container.appendChild(card);
         });
     }
     catch (e) {

@@ -1,32 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
   const registerForm = document.getElementById("registerForm") as HTMLFormElement | null;
+  const messageDiv = document.getElementById("registerMessage") as HTMLDivElement | null;
 
-  if (!registerForm) {
-    console.error("Register form bulunamadı.");
+  if (!registerForm || !messageDiv) {
+    console.error("Form veya mesaj div'i bulunamadı.");
     return;
   }
 
-  registerForm.addEventListener("submit", async (e: SubmitEvent) => {
+  registerForm.addEventListener("submit", async (e: Event) => {
     e.preventDefault();
 
     const usernameInput = document.getElementById("username") as HTMLInputElement | null;
     const passwordInput = document.getElementById("password") as HTMLInputElement | null;
 
     if (!usernameInput || !passwordInput) {
-      alert("Username ya da password inputu bulunamadı.");
+      messageDiv.style.color = "red";
+      messageDiv.textContent = "Username or password input not found.";
       return;
     }
 
-    const username = usernameInput.value.trim();
-    const password = passwordInput.value.trim();
+    const username: string = usernameInput.value.trim();
+    const password: string = passwordInput.value.trim();
 
     if (!username || !password) {
-      alert("Please fill in both username and password.");
+      messageDiv.style.color = "red";
+      messageDiv.textContent = "Please fill in both username and password.";
       return;
     }
 
     try {
-      const response = await fetch("/auth/register", {
+      const response: Response = await fetch("/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,17 +38,23 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        alert("Register successful!");
+        messageDiv.style.color = "green";
+        messageDiv.textContent = "Register successful! Redirecting to login...";
+        setTimeout(() => {
+          window.location.href = "/login.html";
+        }, 1500);
       } else {
         const error: { message?: string } = await response.json();
-        alert(`Register failed: ${error.message || response.statusText}`);
+        messageDiv.style.color = "red";
+        messageDiv.textContent = `Register failed: ${error.message || response.statusText}`;
       }
-    } catch (err) {
+    } catch (err: unknown) {
       if (err instanceof Error) {
-        alert("Network error: " + err.message);
+        messageDiv.style.color = "red";
+        messageDiv.textContent = "Network error: " + err.message;
       } else {
-        alert("Bilinmeyen bir hata oluştu.");
+        messageDiv.style.color = "red";
+        messageDiv.textContent = "An unknown error occurred.";
       }
     }
   });

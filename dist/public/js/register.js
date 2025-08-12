@@ -10,8 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 document.addEventListener("DOMContentLoaded", () => {
     const registerForm = document.getElementById("registerForm");
-    if (!registerForm) {
-        console.error("Register form bulunamadı.");
+    const messageDiv = document.getElementById("registerMessage");
+    if (!registerForm || !messageDiv) {
+        console.error("Form veya mesaj div'i bulunamadı.");
         return;
     }
     registerForm.addEventListener("submit", (e) => __awaiter(void 0, void 0, void 0, function* () {
@@ -19,13 +20,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const usernameInput = document.getElementById("username");
         const passwordInput = document.getElementById("password");
         if (!usernameInput || !passwordInput) {
-            alert("Username ya da password inputu bulunamadı.");
+            messageDiv.style.color = "red";
+            messageDiv.textContent = "Username or password input not found.";
             return;
         }
         const username = usernameInput.value.trim();
         const password = passwordInput.value.trim();
         if (!username || !password) {
-            alert("Please fill in both username and password.");
+            messageDiv.style.color = "red";
+            messageDiv.textContent = "Please fill in both username and password.";
             return;
         }
         try {
@@ -37,20 +40,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: JSON.stringify({ username, password }),
             });
             if (response.ok) {
-                const data = yield response.json();
-                alert("Register successful!");
+                messageDiv.style.color = "green";
+                messageDiv.textContent = "Register successful! Redirecting to login...";
+                setTimeout(() => {
+                    window.location.href = "/login.html";
+                }, 1500);
             }
             else {
                 const error = yield response.json();
-                alert(`Register failed: ${error.message || response.statusText}`);
+                messageDiv.style.color = "red";
+                messageDiv.textContent = `Register failed: ${error.message || response.statusText}`;
             }
         }
         catch (err) {
             if (err instanceof Error) {
-                alert("Network error: " + err.message);
+                messageDiv.style.color = "red";
+                messageDiv.textContent = "Network error: " + err.message;
             }
             else {
-                alert("Bilinmeyen bir hata oluştu.");
+                messageDiv.style.color = "red";
+                messageDiv.textContent = "An unknown error occurred.";
             }
         }
     }));
