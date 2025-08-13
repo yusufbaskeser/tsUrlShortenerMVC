@@ -1,6 +1,7 @@
 import {generateToken} from '../utils/generateToken'
 import {findShortUrl, createUrl} from '../repository/url'
 import {getByToken} from '../repository/user'
+import config from '../config/config'
 import User from '../models/user'
 import { UrlInput, Url } from '../types/User';
 
@@ -25,7 +26,7 @@ export const urlShorten = async ({ token, originalUrl }: UrlInput) => {
   await createUrl({ shortUrl, originalUrl, user: User });
 
   return {
-    shortUrl: `http://localhost:${process.env.PORT}/url/${shortUrl}`,
+    shortUrl: `${config.BASE_URL}/url/${shortUrl}`,
   };
 };
 

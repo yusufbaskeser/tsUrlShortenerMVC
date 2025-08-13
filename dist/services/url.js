@@ -8,11 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.urlRedirect = exports.urlShorten = void 0;
 const generateToken_1 = require("../utils/generateToken");
 const url_1 = require("../repository/url");
 const user_1 = require("../repository/user");
+const config_1 = __importDefault(require("../config/config"));
 const urlShorten = (_a) => __awaiter(void 0, [_a], void 0, function* ({ token, originalUrl }) {
     if (!originalUrl) {
         throw new Error("Original URL are required");
@@ -27,7 +31,7 @@ const urlShorten = (_a) => __awaiter(void 0, [_a], void 0, function* ({ token, o
     const shortUrl = (0, generateToken_1.generateToken)(6);
     yield (0, url_1.createUrl)({ shortUrl, originalUrl, user: User });
     return {
-        shortUrl: `http://localhost:${process.env.PORT}/url/${shortUrl}`,
+        shortUrl: `${config_1.default.BASE_URL}/url/${shortUrl}`,
     };
 });
 exports.urlShorten = urlShorten;
