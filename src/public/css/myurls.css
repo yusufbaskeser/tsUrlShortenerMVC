@@ -1,0 +1,131 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Genel body ve html */
+body, html {
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff;
+  color: #0d3c91;
+  margin: 0;
+  padding: 0;
+}
+
+/* HEADER */
+header {
+  width: 100%;
+  background: #0d47a1;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid #2050d5;
+  z-index: 100;
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 2rem;
+  color: #fff;
+  text-decoration: none;
+  user-select: none;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li a {
+  color: #bbdefb;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+/* MAIN CONTAINER */
+.main-container {
+  max-width: 1000px;
+  margin: 40px auto 80px auto;
+  padding: 20px 30px;
+  min-height: 600px;
+  background: #f5f9ff;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(13, 60, 145, 0.15);
+}
+
+/* My URLs Bölümü */
+.myurls-section h1, .allurls-section h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+/* URL Listesi */
+.url-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Her URL Kartı */
+.url-card {
+  display: flex;
+  flex-direction: column; /* ALT ALTA */
+  gap: 16px;
+  background: white;
+  padding: 24px 28px;
+  border-radius: 14px;
+  box-shadow: 0 3px 14px rgba(13, 60, 145, 0.12);
+  user-select: text;
+  color: #0d3c91;
+  font-size: 1.15rem;
+}
+
+
+
+.original-url p, .shortly-url p {
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.original-url a, .shortly-url a {
+  color: #1976d2;
+  text-decoration: none;
+  word-break: break-word;
+  font-size: 1rem;
+}
+
+.original-url a:hover, .shortly-url a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive: Mobilde zaten alt alta, ekstra değişiklik gerek yok */
+
+/* FOOTER */
+footer {
+  width: 100%;
+  background: #0d47a1;
+  color: #bbdefb;
+  text-align: center;
+  padding: 18px 0;
+  font-weight: 600;
+  font-size: 1rem;
+  user-select: none;
+}

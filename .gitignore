@@ -1,6 +1,2 @@
 .env
 node_modules
-dist/public/
-dist/view/
-src/public/
-src/view/
