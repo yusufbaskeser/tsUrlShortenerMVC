@@ -20,7 +20,7 @@ app.use(loggerReqRes_1.loggerReqRes);
 app.use("/auth", auth_1.default);
 app.use("/user", user_1.default);
 app.use("/url", url_1.default);
-app.get("/home", (req, res) => {
+app.get("/", (req, res) => {
     res.sendFile(path_1.default.join(__dirname, "views", "home.html"));
 });
 app.get("/login", (req, res) => {
@@ -28,9 +28,6 @@ app.get("/login", (req, res) => {
 });
 app.get("/register", (req, res) => {
     res.sendFile(path_1.default.join(__dirname, "views", "register.html"));
-});
-app.get("/shorten", (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, "views", "shorten.html"));
 });
 app.get("/list", (req, res) => {
     res.sendFile(path_1.default.join(__dirname, "views", "allUrls.html"));

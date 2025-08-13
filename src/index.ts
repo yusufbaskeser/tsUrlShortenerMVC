@@ -31,7 +31,7 @@ app.use("/user" , userRouter);
 app.use("/url" , urlRouter);
 
 
-app.get("/home", (req, res) => {
+app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "home.html"));
   });
   
@@ -43,9 +43,7 @@ app.get("/home", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "register.html"));
   });
   
-  app.get("/shorten", (req, res) => {
-    res.sendFile(path.join(__dirname, "views", "shorten.html"));
-  });
+ 
   
   app.get("/list", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "allUrls.html"));

@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ES2020",                 // ES6 yerine biraz daha güncel, Render uyumlu
+    "target": "ES2020",
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "rootDir": "src",                   // TypeScript dosyaların
-    "outDir": "./dist",                  // JS çıkışı
-    "sourceMap": true                    // Debug için tavsiye edilir
+    "rootDir": "src",
+    "outDir": "./dist",
+    "sourceMap": true
   },
-  "include": ["src", "tests"],          // Testleri de dahil edebiliriz
-  "exclude": ["node_modules"]           // Gereksiz dosyalar build’e dahil olmasın
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }
