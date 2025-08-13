@@ -11,3 +11,4 @@ const urlSchema = new mongoose_1.default.Schema({
 });
 const Url = mongoose_1.default.model("Url", urlSchema);
 exports.default = Url;
+//# sourceMappingURL=url.js.map

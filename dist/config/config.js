@@ -12,3 +12,4 @@ exports.default = {
     JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
     BASE_URL: process.env.BASE_URL || "http://localhost:3000",
 };
+//# sourceMappingURL=config.js.map

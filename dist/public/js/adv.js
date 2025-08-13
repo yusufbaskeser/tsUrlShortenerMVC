@@ -9,3 +9,4 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = shortUrl;
     }, 5000);
 });
+//# sourceMappingURL=adv.js.map

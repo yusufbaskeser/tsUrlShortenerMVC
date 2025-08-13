@@ -9,3 +9,4 @@ function generateToken(length = 20) {
     }
     return token;
 }
+//# sourceMappingURL=generateToken.js.map

@@ -15,3 +15,4 @@ function generateJwtToken(user) {
     }
 }
 exports.default = generateJwtToken;
+//# sourceMappingURL=generateJwtToken.js.map

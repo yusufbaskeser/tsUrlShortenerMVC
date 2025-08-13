@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.getElementById("loginForm");
     const messageDiv = document.getElementById("loginMessage");
@@ -15,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Login form veya mesaj div'i bulunamadı.");
         return;
     }
-    loginForm.addEventListener("submit", (e) => __awaiter(void 0, void 0, void 0, function* () {
+    loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const usernameInput = document.getElementById("username");
         const passwordInput = document.getElementById("password");
@@ -32,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         try {
-            const response = yield fetch("/auth/login", {
+            const response = await fetch("/auth/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -40,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: JSON.stringify({ username, password }),
             });
             if (response.ok) {
-                const data = yield response.json();
+                const data = await response.json();
                 localStorage.setItem("token", data.token);
                 messageDiv.style.color = "green";
                 messageDiv.textContent = "Login successful! Redirecting...";
@@ -49,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }, 1500);
             }
             else {
-                const error = yield response.json();
+                const error = await response.json();
                 messageDiv.style.color = "red";
                 messageDiv.textContent = `Login failed: ${error.message || response.statusText}`;
             }
@@ -64,5 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 messageDiv.textContent = "An unknown error occurred.";
             }
         }
-    }));
+    });
 });
+//# sourceMappingURL=login.js.map

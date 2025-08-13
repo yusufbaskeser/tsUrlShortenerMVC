@@ -10,3 +10,4 @@ const authMiddleware_1 = require("../middleware/authMiddleware");
 router.get("/myurls", authMiddleware_1.authMiddleware, user_1.getMyUrls);
 router.get("/list", user_1.listUrls);
 exports.default = router;
+//# sourceMappingURL=user.js.map

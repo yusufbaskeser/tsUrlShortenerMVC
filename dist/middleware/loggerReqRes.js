@@ -21,3 +21,4 @@ const loggerReqRes = (req, res, next) => {
     next();
 };
 exports.loggerReqRes = loggerReqRes;
+//# sourceMappingURL=loggerReqRes.js.map

@@ -10,3 +10,4 @@ const logg = (str) => {
     logger.error(str);
 };
 exports.logg = logg;
+//# sourceMappingURL=logger.js.map

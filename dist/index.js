@@ -55,3 +55,4 @@ exports.default = {
     mongoose: mongoose_1.default,
     server
 };
+//# sourceMappingURL=index.js.map

@@ -1,19 +1,10 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 function isValidUrl(url) {
     try {
         new URL(url);
         return true;
     }
-    catch (_a) {
+    catch {
         return false;
     }
 }
@@ -21,8 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("shortenForm");
     const input = document.getElementById("originalUrl");
     const resultMessage = document.getElementById("result-message");
-    form.addEventListener("submit", (e) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a;
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const originalUrl = input.value.trim();
         if (!originalUrl) {
@@ -33,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
             resultMessage.textContent = "Invalid URL format , Please enter a URL";
             return;
         }
-        const token = (_a = localStorage.getItem("token")) !== null && _a !== void 0 ? _a : "";
+        const token = localStorage.getItem("token") ?? "";
         if (!token) {
             resultMessage.innerHTML = `
         <span style="color:#f44336; font-weight:700;">
@@ -46,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         try {
-            const response = yield fetch("/url/shorten", {
+            const response = await fetch("/url/shorten", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -55,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: JSON.stringify({ originalUrl }),
             });
             if (response.ok) {
-                const data = yield response.json();
+                const data = await response.json();
                 localStorage.setItem("lastShortUrl", data.result.shortUrl);
                 resultMessage.innerHTML = `
         <a href="/adv.html" style="color:#2196f3; font-weight:700; text-decoration:none; cursor:pointer;">
@@ -68,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 input.value = "";
             }
             else {
-                const err = yield response.json();
+                const err = await response.json();
                 resultMessage.textContent = `Error: ${err.message || response.statusText}`;
             }
         }
@@ -80,5 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 resultMessage.textContent = "Unknown error occurred.";
             }
         }
-    }));
+    });
 });
+//# sourceMappingURL=home.js.map
