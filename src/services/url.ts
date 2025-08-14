@@ -37,6 +37,11 @@ export const urlRedirect = async (shortUrl: string) => {
       throw new Error("Short URL not found");
     }
   
-    return url.originalUrl;
+    let originalUrl = url.originalUrl;
+    if (!originalUrl.startsWith("http://") && !originalUrl.startsWith("https://")) {
+      originalUrl = `https://${originalUrl}`;
+    }
+  
+    return originalUrl;
   };
   

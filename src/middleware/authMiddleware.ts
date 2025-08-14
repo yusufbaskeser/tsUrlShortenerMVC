@@ -8,7 +8,7 @@ export const authMiddleware = (req: Request, res:Response, next:NextFunction) =>
   const authHeader = req.headers["authorization"];
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ error: "Unauthorized" });
+    return res.redirect("/login");
   }
 
   const token = authHeader.split(" ")[1];
@@ -19,7 +19,7 @@ export const authMiddleware = (req: Request, res:Response, next:NextFunction) =>
 
     next();
   } catch (err) {
-    return res.status(401).json({ error: "Invalid token" });
+    return res.redirect("/login");
   }
 };
 
