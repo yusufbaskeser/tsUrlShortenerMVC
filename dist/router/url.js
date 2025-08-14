@@ -8,6 +8,5 @@ const router = express_1.default.Router();
 const url_1 = require("../controller/url");
 const authMiddleware_1 = require("../middleware/authMiddleware");
 router.post("/shorten", authMiddleware_1.authMiddleware, url_1.shortenUrl);
-router.get("/:shortUrl", url_1.redirectUrl);
 exports.default = router;
 //# sourceMappingURL=url.js.map

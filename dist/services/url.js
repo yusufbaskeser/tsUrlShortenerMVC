@@ -22,7 +22,7 @@ const urlShorten = async ({ token, originalUrl }) => {
     const shortUrl = (0, generateToken_1.generateToken)(6);
     await (0, url_1.createUrl)({ shortUrl, originalUrl, user: User });
     return {
-        shortUrl: `${config_1.default.BASE_URL}/url/${shortUrl}`,
+        shortUrl: `${config_1.default.BASE_URL}/${shortUrl}`,
     };
 };
 exports.urlShorten = urlShorten;
@@ -31,7 +31,11 @@ const urlRedirect = async (shortUrl) => {
     if (!url) {
         throw new Error("Short URL not found");
     }
-    return url.originalUrl;
+    let originalUrl = url.originalUrl;
+    if (!originalUrl.startsWith("http://") && !originalUrl.startsWith("https://")) {
+        originalUrl = `https://${originalUrl}`;
+    }
+    return originalUrl;
 };
 exports.urlRedirect = urlRedirect;
 //# sourceMappingURL=url.js.map

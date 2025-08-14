@@ -24,6 +24,8 @@ import userRouter from './router/user';
 import urlRouter from './router/url';
 
 
+import { redirectUrl } from './controller/url';
+
 app.use(loggerReqRes);
 
 app.use("/auth" , authRouter);
@@ -56,6 +58,8 @@ app.get("/", (req, res) => {
   app.get("/shorten/adv", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "adv.html"));
   });
+
+app.get("/:shortUrl", redirectUrl);
 
 
 

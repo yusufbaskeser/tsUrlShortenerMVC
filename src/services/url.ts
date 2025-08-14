@@ -26,7 +26,7 @@ export const urlShorten = async ({ token, originalUrl }: UrlInput) => {
   await createUrl({ shortUrl, originalUrl, user: User });
 
   return {
-    shortUrl: `${config.BASE_URL}/url/${shortUrl}`,
+    shortUrl: `${config.BASE_URL}/${shortUrl}`,
   };
 };
 

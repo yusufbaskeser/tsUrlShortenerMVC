@@ -16,6 +16,7 @@ app.use(express_1.default.json());
 const auth_1 = __importDefault(require("./router/auth"));
 const user_1 = __importDefault(require("./router/user"));
 const url_1 = __importDefault(require("./router/url"));
+const url_2 = require("./controller/url");
 app.use(loggerReqRes_1.loggerReqRes);
 app.use("/auth", auth_1.default);
 app.use("/user", user_1.default);
@@ -38,6 +39,7 @@ app.get("/myurls", (req, res) => {
 app.get("/shorten/adv", (req, res) => {
     res.sendFile(path_1.default.join(__dirname, "views", "adv.html"));
 });
+app.get("/:shortUrl", url_2.redirectUrl);
 const server = app.listen(config_1.default.PORT, () => {
     mongoose_1.default.connect(String(config_1.default.MONGO_CONNECT))
         .then(() => console.log("MongoDB connected"))

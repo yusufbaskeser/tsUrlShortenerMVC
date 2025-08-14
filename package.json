@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand",
+    "postbuild": "cp -R src/views dist/ && cp -R src/public dist/"
   },
   "dependencies": {
     "@babel/preset-typescript": "^7.27.1",

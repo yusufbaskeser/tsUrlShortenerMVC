@@ -78,20 +78,13 @@ main {
   text-align: center;
   letter-spacing: 1.5px;
 }
+
 .shortener-title span {
   color: #64b5f6;
   text-transform: uppercase;
   letter-spacing: 3px;
-  font-size: 3rem;
-  font-weight: 700;
-  display: inline-block;
-  transition: transform 0.2s ease;
-  margin-left: 0.3rem; /* Buradaki değeri artırıp azaltarak boşluğu ayarlayabilirsin */
 }
 
-.shortener-title span:hover {
-  transform: scale(1.05);
-}
 .shortener-form {
   display: flex;
   flex-direction: column; /* satır değil, sütun */

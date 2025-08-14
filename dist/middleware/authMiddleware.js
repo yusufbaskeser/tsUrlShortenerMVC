@@ -9,7 +9,7 @@ const config_1 = __importDefault(require("../config/config"));
 const authMiddleware = (req, res, next) => {
     const authHeader = req.headers["authorization"];
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-        return res.status(401).json({ error: "Unauthorized" });
+        return res.redirect("/login");
     }
     const token = authHeader.split(" ")[1];
     try {
@@ -18,7 +18,7 @@ const authMiddleware = (req, res, next) => {
         next();
     }
     catch (err) {
-        return res.status(401).json({ error: "Invalid token" });
+        return res.redirect("/login");
     }
 };
 exports.authMiddleware = authMiddleware;
