@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
         <div class="shortly-url">
           <p>Shortly:</p>
-          <a href="http://localhost:3000/url/${item.shortUrl}" target="_blank" rel="noopener noreferrer">${item.shortUrl}</a>
+          <a href="/api/v1/url/${item.shortUrl}" target="_blank">${window.location.origin}/api/v1/url/${item.shortUrl}</a>
         </div>
       `;
 
