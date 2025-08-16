@@ -46,15 +46,24 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             if (response.ok) {
                 const data = await response.json();
+                const fullShortUrl = `${window.location.origin}/${data.result.shortUrl}`;
                 localStorage.setItem("lastShortUrl", data.result.shortUrl);
                 resultMessage.innerHTML = `
         <a href="/adv.html" style="color:#2196f3; font-weight:700; text-decoration:none; cursor:pointer;">
-          Shortened URL: ${data.result.shortUrl}
+          Shortened URL: ${fullShortUrl}
         </a>
+        <button id="copyButton" style="background-color: #4CAF50; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px; vertical-align: middle;">Copy</button>
         <div style="color:#bbdefb; font-size:0.9rem; margin-top:4px; user-select:none;">
           Click the link above to visit.
         </div>
       `;
+                const copyButton = document.getElementById("copyButton");
+                if (copyButton) {
+                    copyButton.addEventListener("click", () => {
+                        navigator.clipboard.writeText(fullShortUrl);
+                        alert("Copied to clipboard!");
+                    });
+                }
                 input.value = "";
             }
             else {
