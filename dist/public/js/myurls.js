@@ -27,7 +27,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         urls.forEach((item) => {
             const card = document.createElement("div");
             card.className = "url-card";
-            const fullShortUrl = `${window.location.origin}/${item.shortUrl}`;
+            const fullShortUrl = `${window.location.origin.replace(/^https?:\/\//, '')}/${item.shortUrl}`;
+            const fullShortUrlWithProtocol = `${window.location.origin}/${item.shortUrl}`;
             card.innerHTML = `
         <div class="original-url">
           <p>Original URL:</p>
@@ -36,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="shortly-url">
           <p>Shortly:</p>
           <a href="/${item.shortUrl}" target="_blank">${fullShortUrl}</a>
-          <button class="copyButton" data-url="${fullShortUrl}" style="background-color: #4CAF50; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px; vertical-align: middle;">Copy</button>
+          <button class="copyButton" data-url="${fullShortUrlWithProtocol}" style="background-color: #4CAF50; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px; vertical-align: middle;">Copy</button>
         </div>
       `;
             container.appendChild(card);

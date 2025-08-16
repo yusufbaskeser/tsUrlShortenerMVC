@@ -46,7 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             if (response.ok) {
                 const data = await response.json();
-                const fullShortUrl = `${window.location.origin}/${data.result.shortUrl}`;
+                const fullShortUrl = `${window.location.origin.replace(/^https?:\/\//, '')}/${data.result.shortUrl}`;
+                const fullShortUrlWithProtocol = `${window.location.origin}/${data.result.shortUrl}`;
                 localStorage.setItem("lastShortUrl", data.result.shortUrl);
                 resultMessage.innerHTML = `
         <a href="/adv.html" style="color:#2196f3; font-weight:700; text-decoration:none; cursor:pointer;">
@@ -60,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const copyButton = document.getElementById("copyButton");
                 if (copyButton) {
                     copyButton.addEventListener("click", () => {
-                        navigator.clipboard.writeText(fullShortUrl);
+                        navigator.clipboard.writeText(fullShortUrlWithProtocol);
                         alert("Copied to clipboard!");
                     });
                 }
