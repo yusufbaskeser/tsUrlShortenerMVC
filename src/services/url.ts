@@ -39,7 +39,7 @@ export const urlRedirect = async (shortUrl: string) => {
   
     let originalUrl = url.originalUrl;
     if (!originalUrl.startsWith("http://") && !originalUrl.startsWith("https://")) {
-      originalUrl = `${originalUrl}`;
+      originalUrl = `https://${originalUrl}`;
     }
   
     return originalUrl;
