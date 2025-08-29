@@ -27,12 +27,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         urls.forEach((item) => {
             const card = document.createElement("div");
             card.className = "url-card";
+            const formattedOriginalUrl = item.originalUrl.startsWith("http") ? item.originalUrl : `https://${item.originalUrl}`;
             const fullShortUrl = `${window.location.origin.replace(/^https?:\/\//, '')}/${item.shortUrl}`;
             const fullShortUrlWithProtocol = `${window.location.origin}/${item.shortUrl}`;
             card.innerHTML = `
         <div class="original-url">
           <p>Original URL:</p>
-          <a href="${item.originalUrl}" target="_blank" rel="noopener noreferrer">${item.originalUrl}</a>
+          <a href="${formattedOriginalUrl}" target="_blank" rel="noopener noreferrer">${item.originalUrl}</a>
         </div>
         <div class="shortly-url">
           <p>Shortly:</p>

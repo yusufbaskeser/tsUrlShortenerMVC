@@ -28,7 +28,9 @@ const urlRedirect = async (shortUrl) => {
         throw new Error("Short URL not found");
     }
     let originalUrl = url.originalUrl;
-    originalUrl = originalUrl.replace(/^(https?|ftp):\/\//, '');
+    if (!originalUrl.startsWith("http://") && !originalUrl.startsWith("https://")) {
+        originalUrl = `https://${originalUrl}`;
+    }
     return originalUrl;
 };
 exports.urlRedirect = urlRedirect;
