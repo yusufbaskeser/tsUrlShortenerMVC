@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://shorterbetter.com/sitemap.xml
