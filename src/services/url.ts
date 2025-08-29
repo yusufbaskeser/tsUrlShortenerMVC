@@ -38,10 +38,7 @@ export const urlRedirect = async (shortUrl: string) => {
     }
   
     let originalUrl = url.originalUrl;
-    if (!originalUrl.startsWith("http://") && !originalUrl.startsWith("https://")) {
-      originalUrl = `https://${originalUrl}`;
-    }
-  
+    originalUrl = originalUrl.replace(/^(https?|ftp):\/\//, '');
     return originalUrl;
   };
   
